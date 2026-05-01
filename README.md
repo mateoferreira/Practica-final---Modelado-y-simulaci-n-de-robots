@@ -6,7 +6,7 @@ El robot cuenta con dos cámaras , una delante y otra en la pinza que enfoca al 
 
 Podemos ver las articulaciones, los frames, y las imágenes de ambas cámaras en la siguiente imagen:
 
-<img width="1449" height="945" alt="imagen" src="https://github.com/user-attachments/assets/52f764d7-b1ae-4625-af9a-7dcd91b71610" />
+<img width="1453" height="940" alt="imagen" src="https://github.com/user-attachments/assets/114f5539-9469-4e2b-9511-d72fbfa3c9a7" />
 
 Para ver el sentido positivo de los giros de las articulaciones, podemos modular la posición de la articulación con el nodo: *joint_state_publisher_gui*, que podemos incluir en nuestro launch de la siguiente forma:
 
