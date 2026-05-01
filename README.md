@@ -34,3 +34,14 @@ Por último, podemos ver los frames del robot en la siguiente imágen:
 <img width="1832" height="800" alt="imagen" src="https://github.com/user-attachments/assets/5351b269-1348-46b8-8806-bc41bf3f6921" />
 
 O en el pdf: *frames_2026-04-26_19.00.35.pdf* dentro de la carpeta rover_description
+
+## 2º Objetivo de la simulación
+
+El robot debe de coger el cubo verde y depositarlo en el maletero. Después debe orientarse hacia el cubo azul, cogerlo, y moverlo hasta el cubo rojo para depositarlo encima (si puede), y luego debe de avanzar unos metros.
+
+Para ello me he ayudado del paquete *teleop_twist_keyboard*, aparte del framework de *Moveit2*, para configurar las poses del robot. El video de la simulación es el siguiente: 
+
+
+
+https://github.com/user-attachments/assets/22664e53-6c85-47b9-80b3-4c69ac9ce682
+
