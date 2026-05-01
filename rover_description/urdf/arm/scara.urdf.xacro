@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot name="robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:include filename="$(find rover_description)/urdf/arm/gripper.urdf.xacro"/>
+
+<xacro:macro name="scara" params="parent_link x y z r p yw">
+  <joint name="arm_base_link_joint" type="fixed">
+    <origin rpy="${r} ${p} ${yw}" xyz="${x} ${y} ${z}"/>
+    <parent link="${parent_link}"/>
+    <child link="arm_base_link"/>
+  </joint>
+  <joint name="link1_link_joint" type="revolute">
+    <limit lower="-3.05000" upper="3.05000" effort="1000" velocity="100.0"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00703 0.00482 0.54623"/>
+    <parent link="arm_base_link"/>
+    <child link="link1_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="link2_link_joint" type="revolute">
+    <limit lower="-2.00000" upper="2.00000" effort="1000" velocity="100.0"/>
+    <origin rpy="0.00000 0.00000 -3.14159" xyz="1.37657 -0.01190 0.19480"/>
+    <parent link="link1_link"/>
+    <child link="link2_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="link3_link_joint" type="revolute">
+    <limit lower="-1.57000" upper="1.57000" effort="1000" velocity="100.0"/>
+    <origin rpy="0.00000 0.00000 3.14159" xyz="-0.88330 0.00711 0.06671"/>
+    <parent link="link2_link"/>
+    <child link="link3_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="link4_link_joint" type="prismatic">
+    <limit lower="-1.50000" upper="0.20000" effort="1000" velocity="100.0"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00446 0.00427 0.17412"/>
+    <parent link="link3_link"/>
+    <child link="link4_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="link5_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00146 -0.00006 -0.89452"/>
+    <parent link="link4_link"/>
+    <child link="link5_link"/>
+  </joint>
+  <link name="arm_base_link">
+    <collision name="base_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.009.dae" scale="0.16927 0.16927 0.86707"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="1.54632" ixy="-0.00000" ixz="0.00000" iyy="1.54632" iyz="-0.00000" izz="0.08541"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="6.00000"/>
+    </inertial>
+    <visual name="base">
+      <material name="Material.009"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.009.dae" scale="0.16927 0.16927 0.86707"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="link1_link">
+    <collision name="link1_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.55655 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.dae" scale="1.00000 0.23300 0.12300"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.06485" ixy="-0.00000" ixz="0.00000" iyy="0.88705" iyz="-0.00000" izz="0.91659"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.55655 0.00000 0.00000"/>
+      <mass value="3.50000"/>
+    </inertial>
+    <visual name="link1">
+      <material name="Material.014"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.55655 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.dae" scale="1.00000 0.23300 0.12300"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="link2_link">
+    <collision name="link2_collision">
+      <origin rpy="0.00000 0.00000 3.14159" xyz="-0.44475 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.013.dae" scale="0.67571 0.18837 0.07006"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.04180" ixy="0.00000" ixz="0.00000" iyy="0.46021" iyz="0.00000" izz="0.48892"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.44475 0.00000 0.00000"/>
+      <mass value="4.00000"/>
+    </inertial>
+    <visual name="link2">
+      <material name="Material.007"/>
+      <origin rpy="0.00000 0.00000 -0.00000" xyz="-0.44475 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.013.dae" scale="0.67571 0.18837 0.07006"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="link3_link">
+    <collision name="link3_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.28787"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.016.dae" scale="0.09429 0.09429 0.25145"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.02243" ixy="0.00000" ixz="0.00000" iyy="0.02243" iyz="0.00000" izz="0.00442"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.29248"/>
+      <mass value="1.00000"/>
+    </inertial>
+    <visual name="link3">
+      <material name="Material.015"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.29248"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.016.dae" scale="0.09429 0.09429 0.24632"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="link4_link">
+    <collision name="link4_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.018.dae" scale="0.06875 0.06875 0.88360"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.52285" ixy="-0.00000" ixz="-0.00000" iyy="0.52285" iyz="-0.00000" izz="0.00470"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="2.00000"/>
+    </inertial>
+    <visual name="link4">
+      <material name="Material.011"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.018.dae" scale="0.06875 0.06875 0.88360"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="link5_link">
+    <collision name="link5_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.029.dae" scale="0.53959 2.07906 0.16559"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.09062" ixy="0.00000" ixz="0.00000" iyy="0.00664" iyz="0.00000" izz="0.09612"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+      <mass value="1.00000"/>
+    </inertial>
+    <visual name="link5">
+      <material name="Material.010"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.029.dae" scale="0.53959 2.07906 0.16559"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <xacro:gripper parent_link="link5_link" x_1="0.00025" y_1="0.50000" z_1="-0.28960" x_2="0.00025" y_2="-0.50000" z_2="-0.28960" >
+  </xacro:gripper>
+
+  <transmission name="link1_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="link1_link_joint">
+    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="link1_motor">
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+<transmission name="link2_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="link2_link_joint">
+    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="link2_motor">
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+<transmission name="link3_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="link3_link_joint">
+    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="link3_motor">
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+<transmission name="link4_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="link4_link_joint">
+    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="link4_motor">
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</xacro:macro>
+</robot>

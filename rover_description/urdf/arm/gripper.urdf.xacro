@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot name="robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:macro name="gripper" params="parent_link x_1 y_1 z_1 x_2 y_2 z_2">
+
+  <joint name="pinza_1_link_joint" type="prismatic">
+    <limit lower="0.00000" upper="0.30000" effort="1000" velocity="100.0"/>
+    <origin rpy="1.57080 0.00000 0.00000" xyz="${x_1} ${y_1} ${z_1}"/>
+    <parent link="${parent_link}"/>
+    <child link="pinza_1_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="pinza_2_link_joint" type="prismatic">
+    <limit lower="0.00000" upper="0.30000" effort="1000" velocity="100.0"/>
+    <origin rpy="-1.57080 0.00000 0.00000" xyz="${x_2} ${y_2} ${z_2}"/>
+    <parent link="${parent_link}"/>
+    <child link="pinza_2_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <link name="pinza_1_link">
+    <collision name="pinza_1_collision">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.031.dae" scale="0.53728 0.20000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.04333" ixy="0.00000" ixz="0.00000" iyy="0.05369" iyz="0.00000" izz="0.01369"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <mass value="2.00000"/>
+    </inertial>
+    <visual name="pinza_1">
+      <material name="Material.012"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.031.dae" scale="0.53728 0.20000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="pinza_2_link">
+    <collision name="pinza_2_collision">
+      <origin rpy="1.57080 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.032.dae" scale="0.53728 0.20000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.04333" ixy="0.00000" ixz="0.00000" iyy="0.05369" iyz="-0.00000" izz="0.01369"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+      <mass value="2.00000"/>
+    </inertial>
+    <visual name="pinza_2">
+      <material name="Material.013"/>
+      <origin rpy="1.57080 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.032.dae" scale="0.53728 0.20000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+
+<transmission name="pinz_1_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="pinza_1_link_joint">
+    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="pinza_1_motor">
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+<transmission name="pinza_2_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="pinza_2_link_joint">
+    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="pinza_2_motor">
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</xacro:macro>
+</robot>

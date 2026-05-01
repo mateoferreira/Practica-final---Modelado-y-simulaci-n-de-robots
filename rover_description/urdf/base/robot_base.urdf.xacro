@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="robot_base" params="x y yaw">
+  <joint name="base_footprint_to_base_link" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="${x}  ${y}  1"
+        rpy="0 0 ${yaw}"/>
+  </joint>
+  <joint name="logo_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 0.00000" xyz="-0.12806 -0.00030 -0.96680"/>
+    <parent link="base_link"/>
+    <child link="logo_link"/>
+  </joint>
+  <joint name="maletero_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 0.00000" xyz="-1.16553 0.00000 0.21295"/>
+    <parent link="base_link"/>
+    <child link="maletero_link"/>
+  </joint>
+  <link name="base_footprint"/>
+  <link name="base_link">
+    <collision>
+      <origin xyz="-0.99152 -0.00030 0.03627" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.060.dae"
+              scale="0.98727 0.81300 0.06460"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="40.0"/>
+      <origin xyz="-0.23603 -0.00025 0.01308"/>
+      <inertia ixx="11.77417" ixy="0.00177" ixz="-3.36716"
+               iyy="29.58146" iyz="0.00657" izz="30.57751"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.99152 -0.00030 0.03627"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.060.dae"
+              scale="0.98727 0.81300 0.06460"/>
+      </geometry>
+      <material name="Material.008"/>
+    </visual>
+  </link>
+  <link name="maletero_link">
+    <collision name="maletero.001_collision">
+      <origin rpy="0.00000 0.00000 1.57080" xyz="0.77331 -0.01181 0.06098"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.003.dae" scale="0.81928 0.01000 0.23300"/>
+      </geometry>
+    </collision>
+    <collision name="maletero.002_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.01391 0.81152 0.06389"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.004.dae" scale="0.78401 0.01000 0.23300"/>
+      </geometry>
+    </collision>
+    <collision name="maletero.003_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.01391 -0.81283 0.06234"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.005.dae" scale="0.78569 0.01000 0.23300"/>
+      </geometry>
+    </collision>
+    <collision name="maletero_collision">
+      <origin rpy="0.00000 0.00000 1.57080" xyz="-0.81160 -0.00501 0.10948"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.002.dae" scale="0.81313 0.01045 0.23300"/>
+      </geometry>
+    </collision>
+    <visual name="maletero">
+      <material name="Material.016"/>
+      <origin rpy="0.00000 0.00000 1.57080" xyz="-0.81176 -0.00501 0.10066"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.002.dae" scale="0.81242 0.00946 0.23944"/>
+      </geometry>
+    </visual>
+    <visual name="maletero.001">
+      <material name="Material.019"/>
+      <origin rpy="0.00000 0.00000 1.57080" xyz="0.77545 -0.01182 0.06098"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.003.dae" scale="0.81957 0.01000 0.23300"/>
+      </geometry>
+    </visual>
+    <visual name="maletero.002">
+      <material name="Material.018"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.01391 0.81152 0.06389"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.004.dae" scale="0.78401 0.01000 0.23300"/>
+      </geometry>
+    </visual>
+    <visual name="maletero.003">
+      <material name="Material.017"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.01391 -0.81039 0.06234"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cube.005.dae" scale="0.79894 0.01000 0.23300"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="logo_link">
+    <visual name="logo">
+      <material name="SVGMat.003"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Curve.013.dae" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+
+</xacro:macro>
+
+</robot>

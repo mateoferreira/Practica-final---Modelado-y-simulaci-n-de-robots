@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find rover_description)/urdf/sensors/sensors.urdf.xacro"/>
+<xacro:macro name="camera"
+             params="parent_link prefix x y z rot">
+
+  <joint name="${prefix}_camera_base_joint" type="fixed">
+    <parent link="${parent_link}"/>
+    <child link="${prefix}_camera_base_link"/>
+    <origin xyz="${x} ${y} ${z}" rpy="0 ${rot} 0"/>
+  </joint>
+  <joint name="${prefix}_camera_joint" type="fixed">
+    <parent link="${prefix}_camera_base_link"/>
+    <child link="${prefix}_camera_frame"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="${prefix}_camera_optical_joint" type="fixed">
+    <parent link="${prefix}_camera_frame"/>
+    <child link="${prefix}_camera_optical_frame"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+  </joint>
+
+  <link name="${prefix}_camera_base_link"/>
+  <link name="${prefix}_camera_frame"/>
+  <link name="${prefix}_camera_optical_frame"/>
+  <xacro:camera_sensor prefix="${prefix}"/>
+
+</xacro:macro>
+
+</robot>
+

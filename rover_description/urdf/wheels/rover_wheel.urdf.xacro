@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot name="robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:macro name="rover_wheel" params="prefix parent_link x_1 y_1 z_1 r p y">
+  <joint name="${prefix}rueda_joint" type="continuous">
+    <limit effort="1000" velocity="100.0"/>
+    <origin rpy="${r} ${p} ${y}" xyz="${x_1} ${y_1} ${z_1}"/>
+    <parent link="${parent_link}"/>
+    <child link="${prefix}rueda_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <link name="${prefix}rueda_link">
+    <collision name="${prefix}rueda_collision">
+      <origin rpy="1.57080 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.006.dae" scale="0.00814 0.09492 0.07939"/>
+      </geometry>
+    </collision>
+
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    <inertial>
+      <inertia ixx="0.07116" ixy="0.00019" ixz="0.00075" iyy="0.10001" iyz="-0.00018" izz="0.06854"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+      <mass value="3.00000"/>
+    </inertial>
+    <visual name="${prefix}rueda">
+      <material name="Material.001"/>
+      <origin rpy="1.57080 -0.00000 0.78540" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/dae/Cylinder.006.dae" scale="0.00814 0.09492 0.07939"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <transmission name="${prefix}rueda_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}rueda_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}rueda_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <gazebo reference="${prefix}rueda_link">
+    <mu1>5</mu1>
+    <mu2>5</mu2>
+  </gazebo>
+
+</xacro:macro>
+</robot>

@@ -1,0 +1,51 @@
+<robot name="rover" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<!-- includes -->
+<xacro:include filename="$(find rover_description)/urdf/base/robot_base.urdf.xacro"/>
+<xacro:include filename="$(find rover_description)/urdf/wheels/rover_wheel.urdf.xacro"/>
+<xacro:include filename="$(find rover_description)/urdf/arm/scara.urdf.xacro"/>
+<xacro:include filename="$(find rover_description)/urdf/sensors/camera.urdf.xacro"/>
+<xacro:include filename="$(find rover_description)/urdf/sensors/imu_sensor.urdf.xacro"/>
+<!-- argumentos -->
+<xacro:arg name="robot_ns" default=""/>
+<xacro:arg name="prefix" default=""/>
+
+<xacro:property name="wheel_del_x" value="0.87194"/>
+<xacro:property name="wheel_med_x" value="-0.62806"/>
+<xacro:property name="wheel_tr_x" value="-1.62806"/>
+<xacro:property name="wheel_y" value="1.0"/>
+<xacro:property name="wheel_z" value="-0.70680"/>
+
+<!-- Robot Parts -->
+<!-- Base -->
+<xacro:robot_base x="0.0" y="0.0" yaw="0.0"/>
+<!-- Wheels -->
+<xacro:rover_wheel prefix="front_right_" parent_link="base_link" x_1="${wheel_del_x}" y_1="${wheel_y}" z_1="${wheel_z}" r="-1.57080" p="0" y="0">
+</xacro:rover_wheel>
+<xacro:rover_wheel prefix="front_left_" parent_link="base_link" x_1="${wheel_del_x}" y_1="-${wheel_y}" z_1="${wheel_z}" r="-1.57080" p="0" y="0">
+</xacro:rover_wheel>
+<xacro:rover_wheel prefix="mid_right_" parent_link="base_link" x_1="${wheel_med_x}" y_1="${wheel_y}" z_1="${wheel_z}" r="-1.57080" p="0" y="0">
+</xacro:rover_wheel>
+<xacro:rover_wheel prefix="mid_left_" parent_link="base_link" x_1="${wheel_med_x}" y_1="-${wheel_y}" z_1="${wheel_z}" r="-1.57080" p="0" y="0">
+</xacro:rover_wheel>
+<xacro:rover_wheel prefix="back_right_" parent_link="base_link" x_1="${wheel_tr_x}" y_1="${wheel_y}" z_1="${wheel_z}" r="-1.57080" p="0" y="0">
+</xacro:rover_wheel>
+<xacro:rover_wheel prefix="back_left_" parent_link="base_link" x_1="${wheel_tr_x}" y_1="-${wheel_y}" z_1="${wheel_z}" r="-1.57080" p="0" y="0">
+</xacro:rover_wheel>
+<!-- Arm -->
+<xacro:scara parent_link="base_link" x="0.37781" y="0.00968" z="1.04607" r="0" p="0" yw="0">
+</xacro:scara>
+<!-- sensores -->
+<xacro:imu parent_link="base_link" prefix="imu" x="0" y="0" z="0.3"/>
+
+<xacro:camera parent_link="link5_link" prefix="arm_cam" x="0" y="0" z="-0.07" rot="1.5708"/>
+<xacro:camera parent_link="base_link" prefix="base_cam" x="1.2" y="0" z="0" rot="0"/>
+
+<!-- Gazebo ROS control plugins -->
+<xacro:include filename="$(find rover_description)/urdf/ros2_control.urdf.xacro"/>
+<!--
+ <xacro:arg name="config_controllers" default="$(find gz_ros2_control_demos)/config/diff_drive_controller.yaml"/> 
+-->
+<xacro:arg name="config_controllers" default="$(find rover_description)/config/rover_controllers.yaml"/>
+<xacro:arg name="update_rate" default="100"/>
+<xacro:ros2_control/>
+</robot>
