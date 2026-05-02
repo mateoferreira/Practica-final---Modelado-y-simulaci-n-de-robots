@@ -45,7 +45,7 @@ https://github.com/user-attachments/assets/22664e53-6c85-47b9-80b3-4c69ac9ce682
 
 ## 3º Resultados
 
-Mientras realizaba la simulación, se grababan los topics: /imu, /joint_states y /cmd_vel en una rosbag, que se encuentra en *data* con el nombre *results*. Gracias a esto he podido realizar las siguientes gráficas:
+Mientras realizaba la simulación, se grababan los topics: /imu, /joint_states y /cmd_vel en una rosbag, que se encuentra en *data* con el nombre *results*, o puede descargarse aqui: [rosbag](https://github.com/mateoferreira/Practica-final---Modelado-y-simulacion-de-robots/releases/download/v1.0/results.zip). Gracias a esto he podido realizar las siguientes gráficas:
 
 
 ### 1- Aceleración vs tiempo
