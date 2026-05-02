@@ -41,7 +41,27 @@ El robot debe de coger el cubo verde y depositarlo en el maletero. Después debe
 
 Para ello me he ayudado del paquete *teleop_twist_keyboard*, aparte del framework de *Moveit2*, para configurar las poses del robot. El video de la simulación es el siguiente: 
 
-
-
 https://github.com/user-attachments/assets/22664e53-6c85-47b9-80b3-4c69ac9ce682
+
+## 3º Resultados
+
+Mientras realizaba la simulación, se grababan los topics: /imu, /joint_states y /cmd_vel en una rosbag para poder realizar las siguientes gráficas:
+
+### 1- Aceleración vs tiempo
+
+<img width="999" height="578" alt="imagen" src="https://github.com/user-attachments/assets/2b336393-9192-4f52-8c01-8102be76dfe7" />
+
+
+### 2- Posición de las ruedas vs tiempo
+
+<img width="1004" height="581" alt="imagen" src="https://github.com/user-attachments/assets/ca55e82e-9a91-4487-9897-27034045afd4" />
+
+### 3- G-parcial del brazo + gripper
+
+<img width="998" height="582" alt="imagen" src="https://github.com/user-attachments/assets/5f5bd0e8-5085-4b20-a8cc-c428aea216ca" />
+
+Para que veamos la importancia de la fuerza ejercida por el gripper: 
+
+<img width="998" height="582" alt="imagen" src="https://github.com/user-attachments/assets/4daec799-0790-42d9-ad5b-1d76bff5c022" />
+
 
